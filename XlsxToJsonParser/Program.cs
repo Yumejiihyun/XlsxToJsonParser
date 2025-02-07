@@ -60,7 +60,7 @@ namespace XlsxToJsonParser
                 data.Add(new HeadCount { Date = date, Number = resultNumber });
             }
 
-            object[] objects = [titles, data];
+            List<object> objects = data.ToList<object>().Prepend(titles).ToList();
             string serializedObject = JsonConvert.SerializeObject(objects, Formatting.Indented);
             string newFilePath = Path.ChangeExtension(package.File.FullName, "json");
             File.WriteAllText(newFilePath, serializedObject);
